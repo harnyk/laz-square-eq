@@ -1,0 +1,134 @@
+object Form1: TForm1
+  Left = 1286
+  Height = 992
+  Top = 627
+  Width = 1382
+  Caption = 'Square Equation'
+  ClientHeight = 992
+  ClientWidth = 1382
+  DesignTimePPI = 240
+  Font.CharSet = RUSSIAN_CHARSET
+  Font.Height = -53
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  Font.Style = [fsBold]
+  LCLVersion = '2.2.0.4'
+  object GroupBox1: TGroupBox
+    Left = 20
+    Height = 262
+    Top = 20
+    Width = 1300
+    Caption = 'Condition'
+    ClientHeight = 186
+    ClientWidth = 1296
+    TabOrder = 0
+    object EFactorA: TFloatSpinEdit
+      Left = 20
+      Height = 79
+      Top = 23
+      Width = 248
+      TabOrder = 0
+      Value = 1
+    end
+    object Label1: TLabel
+      Left = 298
+      Height = 71
+      Top = 27
+      Width = 102
+      Caption = 'X^2'
+    end
+    object Label2: TLabel
+      Left = 430
+      Height = 71
+      Top = 27
+      Width = 37
+      Caption = '+'
+    end
+    object Label4: TLabel
+      Left = 840
+      Height = 71
+      Top = 27
+      Width = 37
+      Caption = '+'
+    end
+    object Label5: TLabel
+      Left = 1185
+      Height = 71
+      Top = 27
+      Width = 82
+      Caption = '= 0'
+    end
+    object EFactorB: TFloatSpinEdit
+      Left = 497
+      Height = 79
+      Top = 23
+      Width = 248
+      TabOrder = 1
+    end
+    object Label3: TLabel
+      Left = 775
+      Height = 71
+      Top = 27
+      Width = 35
+      Caption = 'X'
+    end
+    object EFactorC: TFloatSpinEdit
+      Left = 907
+      Height = 79
+      Top = 23
+      Width = 248
+      TabOrder = 2
+    end
+  end
+  object Button1: TButton
+    Left = 20
+    Height = 102
+    Top = 300
+    Width = 260
+    Caption = 'Solve'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object GroupBox2: TGroupBox
+    Left = 32
+    Height = 340
+    Top = 448
+    Width = 862
+    Caption = 'Results'
+    ClientHeight = 264
+    ClientWidth = 858
+    TabOrder = 2
+    object EResultX1: TFloatSpinEdit
+      Left = 167
+      Height = 79
+      Top = 41
+      Width = 245
+      TabOrder = 0
+      Visible = False
+    end
+    object EResultX2: TFloatSpinEdit
+      Left = 564
+      Height = 79
+      Top = 41
+      Width = 245
+      TabOrder = 1
+      Visible = False
+    end
+    object LResultX1: TLabel
+      Left = 40
+      Height = 71
+      Top = 45
+      Width = 102
+      Caption = 'X1='
+      Visible = False
+    end
+    object LResultX2: TLabel
+      Left = 437
+      Height = 71
+      Top = 45
+      Width = 102
+      Caption = 'X2='
+      Visible = False
+    end
+  end
+end
