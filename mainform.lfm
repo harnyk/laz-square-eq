@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 1286
-  Height = 992
+  Height = 657
   Top = 627
   Width = 1382
   Caption = 'Square Equation'
-  ClientHeight = 992
+  ClientHeight = 657
   ClientWidth = 1382
   DesignTimePPI = 240
   Font.CharSet = RUSSIAN_CHARSET
@@ -27,6 +27,7 @@ object Form1: TForm1
       Height = 79
       Top = 23
       Width = 248
+      OnChange = Solve
       TabOrder = 0
       Value = 1
     end
@@ -63,6 +64,7 @@ object Form1: TForm1
       Height = 79
       Top = 23
       Width = 248
+      OnChange = Solve
       TabOrder = 1
     end
     object Label3: TLabel
@@ -77,32 +79,25 @@ object Form1: TForm1
       Height = 79
       Top = 23
       Width = 248
+      OnChange = Solve
       TabOrder = 2
     end
   end
-  object Button1: TButton
-    Left = 20
-    Height = 102
-    Top = 300
-    Width = 260
-    Caption = 'Solve'
-    OnClick = Button1Click
-    TabOrder = 1
-  end
   object GroupBox2: TGroupBox
     Left = 32
-    Height = 340
-    Top = 448
-    Width = 862
+    Height = 256
+    Top = 328
+    Width = 1288
     Caption = 'Results'
-    ClientHeight = 264
-    ClientWidth = 858
-    TabOrder = 2
+    ClientHeight = 180
+    ClientWidth = 1284
+    TabOrder = 1
     object EResultX1: TFloatSpinEdit
       Left = 167
       Height = 79
       Top = 41
       Width = 245
+      Enabled = False
       TabOrder = 0
       Visible = False
     end
@@ -111,6 +106,7 @@ object Form1: TForm1
       Height = 79
       Top = 41
       Width = 245
+      Enabled = False
       TabOrder = 1
       Visible = False
     end
@@ -128,6 +124,14 @@ object Form1: TForm1
       Top = 45
       Width = 102
       Caption = 'X2='
+      Visible = False
+    end
+    object LResultNoRoots: TLabel
+      Left = 40
+      Height = 71
+      Top = 45
+      Width = 231
+      Caption = 'No Roots'
       Visible = False
     end
   end

@@ -6,14 +6,13 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, MaskEdit, Spin,
-  EditBtn, StdCtrls, ExtCtrls;
+  StdCtrls, ExtCtrls, solver;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    Button1: TButton;
     EFactorA: TFloatSpinEdit;
     EFactorB: TFloatSpinEdit;
     EFactorC: TFloatSpinEdit;
@@ -28,7 +27,8 @@ type
     Label5: TLabel;
     LResultX1: TLabel;
     LResultX2: TLabel;
-    procedure Button1Click(Sender: TObject);
+    LResultNoRoots: TLabel;
+    procedure Solve(Sender: TObject);
 
   private
 
@@ -45,122 +45,27 @@ implementation
 
 { TForm1 }
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.Solve(Sender: TObject);
 var
-  a, b, c, D, x1, x2, ca: real;
-  hasRoots: (hrNone, hrSingle, hrDouble);
-  equationKind: (
-    //ax^2 = 0
-    ekBAndCAreZeroes,
-    //ax^2 + bx = 0
-    ekCIsZero,
-    //ax^2 + c = 0
-    ekBIsZero,
-    //complete
-    ekComplete);
+  a, b, c: real;
+  r: SquareEquationResult;
 begin
-  //Input
   a := EFactorA.Value;
   b := EFactorB.Value;
   c := EFactorC.Value;
 
-  //Determine a kind of equation
-  if (b = 0) and (c = 0) then equationKind := ekBAndCAreZeroes
-  else if c = 0.0 then equationKind := ekCIsZero
-  else if b = 0.0 then equationKind := ekBIsZero
-  else
-    equationKind := ekComplete;
+  r := SolveSquareEqation(a, b, c);
 
-  //Solve the equation
-  case (equationKind) of
-    ekComplete:
-    begin
-      D := sqr(b) - 4 * a * c;
+  LResultNoRoots.Visible := r.roots = rnNone;
 
-      if D < 0 then
-      begin
-        hasRoots := hrNone;
-      end
-      else if D = 0 then
-      begin
-        hasRoots := hrSingle;
-        x1 := -b / (2 * a);
-      end
-      else if D > 0 then
-      begin
-        hasRoots := hrDouble;
-        x1 := (-b - sqrt(D)) / (2 * a);
-        x1 := (-b + sqrt(D)) / (2 * a);
-      end;
+  EResultX1.Visible := (r.roots = rnSingle) or (r.roots = rnDouble);
+  LResultX1.Visible := EResultX1.Visible;
 
-    end;
+  EResultX2.Visible := (r.roots = rnDouble);
+  LResultX2.Visible := EResultX2.Visible;
 
-    //ax^2 = 0
-    ekBAndCAreZeroes:
-    begin
-      hasRoots := hrSingle;
-      x1 := 0;
-    end;
-
-    //ax^2 + bx = 0
-    ekCIsZero:
-    begin
-      hasRoots := hrDouble;
-      x1 := 0;
-      x2 := -b / a;
-    end;
-
-    //ax^2 + c = 0
-    ekBIsZero:
-    begin
-      ca := -c / a;
-      if ca < 0 then
-      begin
-        hasRoots := hrNone;
-      end
-      else if ca = 0 then
-      begin
-        hasRoots := hrSingle;
-        x1 := 0;
-      end
-      else
-      begin
-        hasRoots := hrDouble;
-        x1 := sqrt(ca);
-        x2 := -x1;
-      end;
-    end;
-  end;
-
-  //Display the results
-  case (hasRoots) of
-    hrNone:
-    begin
-      LResultX1.Visible := False;
-      LResultX2.Visible := False;
-      EResultX1.Visible := False;
-      EResultX2.Visible := False;
-    end;
-    hrSingle:
-    begin
-      LResultX1.Visible := True;
-      LResultX2.Visible := False;
-      EResultX1.Visible := True;
-      EResultX2.Visible := False;
-
-      EResultX1.Value := x1;
-    end;
-    hrDouble:
-    begin
-      LResultX1.Visible := True;
-      LResultX2.Visible := True;
-      EResultX1.Visible := True;
-      EResultX2.Visible := True;
-
-      EResultX1.Value := x1;
-      EResultX2.Value := x2;
-    end;
-  end;
+  if (r.roots = rnSingle) or (r.roots = rnDouble) then EResultX1.Value := r.x1;
+  if r.roots = rnDouble then EResultX2.Value := r.x2;
 
 end;
 
